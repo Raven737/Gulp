@@ -5,7 +5,21 @@
 
 .main {
   height: 400px;
-  background-color: #87decb;
+  background-color: #d41414;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main img {
+  width: 400px;
+  height: 400px;
 }
 
 .footer {

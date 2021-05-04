@@ -1,4 +1,12 @@
 .main {
     height          : 400px;
-    background-color: rgb(135, 222, 203);
+    background-color: rgb(212, 20, 20);
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+
+    & img {
+        width : 400px;
+        height: 400px;
+    }
 }
