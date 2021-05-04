@@ -151,7 +151,7 @@ function watchFiles(params) {
 }
 
 function clean(params) {
-  return del(path.clean);											// Видаляє папку dist.
+  return del(path.clean);			// Видаляє папку dist.
 }
 
 let build = gulp.series(clean, gulp.parallel(html, css, js, images));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та images().
