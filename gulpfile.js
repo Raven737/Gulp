@@ -53,72 +53,72 @@ function browserSync(params) {
   })
 }
 
-function html() {															// HTML з папки SRC -> в папку dist -> перезавантаження сторінки.
-  return src(path.src.html)										// Обирає файл html (#src/.html, а файли _*.html НЕ обирає).
-    .pipe(fileinclude())											// Збирає в один файл.
-    .pipe(webphtml())                         // Інтегрує формат webp в html.
-    .pipe(dest(path.build.html))							// Вивантаження файлу html в папку dist/.
-    .pipe(browsersync.stream())								// Перезавантажує сторінку.
+function html() {								 // HTML з папки SRC -> в папку dist -> перезавантаження сторінки.
+  return src(path.src.html)		 	 // Обирає файл html (#src/.html, а файли _*.html НЕ обирає).
+    .pipe(fileinclude())			 	 // Збирає в один файл.
+    .pipe(webphtml())            // Інтегрує формат webp в html.
+    .pipe(dest(path.build.html)) // Вивантаження файлу html в папку dist/.
+    .pipe(browsersync.stream())	 // Перезавантажує сторінку.
 }
 
-function css() {															// SCSS -> CSS -> в dist/css -> перезавантаження сторінки.
-  return src(path.src.css)										// Обираємо файл style.scss (#src/scss/style.scss).
-    .pipe(																		// scss -> css.
+function css() {								 // SCSS -> CSS -> в dist/css -> перезавантаження сторінки.
+  return src(path.src.css)			 // Обираємо файл style.scss (#src/scss/style.scss).
+    .pipe(											 // scss -> css.
       scss({
         outputStyle: "expanded"
       })
     )
-    .pipe(                                    // Групує і вставляє медіа запити в кінець файлу.
+    .pipe(                       // Групує і вставляє медіа запити в кінець файлу.
       group_media()
     )
-    .pipe(                                    // Додає автопрефікси.
+    .pipe(                       // Додає автопрефікси.
       autoprefixer({
         overrideBrowserslist: ["last 5 versions"],
         cascade: true
       })
     )
     // .pipe(webpcss())                          // Інтегрує формат webp в css.
-    .pipe(dest(path.build.css))								// Вивантаження файлу css в папку dist/css.
-    .pipe(clean_css())                        // Оптимізує (очищає та стискає) css файл.
+    .pipe(dest(path.build.css))		// Вивантаження файлу css в папку dist/css.
+    .pipe(clean_css())            // Оптимізує (очищає та стискає) css файл.
     .pipe(
-      rename({                                // Переіменовує файл: додає до імя + ".min.css"
+      rename({                    // Переіменовує файл: додає до імя + ".min.css"
         extname: ".min.css"
       })
     )
-    .pipe(dest(path.build.css))								// Вивантаження файлу css в папку dist/css.
-    .pipe(browsersync.stream())								// Перезавантажує сторінку.
+    .pipe(dest(path.build.css))		// Вивантаження файлу css в папку dist/css.
+    .pipe(browsersync.stream())		// Перезавантажує сторінку.
 }
 
-function js() {															  // JS з папки SRC -> в папку dist -> перезавантаження сторінки.
-  return src(path.src.js)										  // Обираємо файл script.js. (#src/js/script.js).
-    .pipe(fileinclude())											// Збирає в один файл.
-    .pipe(dest(path.build.js))							  // Вивантаження файлу js в папку dist/js.
+function js() {										// JS з папки SRC -> в папку dist -> перезавантаження сторінки.
+  return src(path.src.js)					// Обираємо файл script.js. (#src/js/script.js).
+    .pipe(fileinclude())					// Збирає в один файл.
+    .pipe(dest(path.build.js))		// Вивантаження файлу js в папку dist/js.
     .pipe(
-      uglify()                                // Оптимізує (зтискає) файл.
+      uglify()                     // Оптимізує (зтискає) файл.
     )
     .pipe(
       rename({
-        extname: ".min.js"                   // Переіменовує файл: додає до імя + ".min.js".
+        extname: ".min.js"         // Переіменовує файл: додає до імя + ".min.js".
       })
     )
-    .pipe(dest(path.build.js))							  // Вивантаження файлу js в папку dist/js.
-    .pipe(browsersync.stream())								// Перезавантажує сторінку.
+    .pipe(dest(path.build.js))		 // Вивантаження файлу js в папку dist/js.
+    .pipe(browsersync.stream())		 // Перезавантажує сторінку.
 }
 
-function images() {													  // img з папки SRC -> в папку dist -> перезавантаження сторінки.
-  return src(path.src.img)										// Обираємо файл img, який знаходиться в папці #src/img.
-    .pipe(                                    // Оптримізує зображення
+function images() {								 // img з папки SRC -> в папку dist -> перезавантаження сторінки.
+  return src(path.src.img)				 // Обираємо файл img, який знаходиться в папці #src/img.
+    .pipe(                         // Оптримізує зображення
       webp({
         quality: 70
       })
     )
-    .pipe(dest(path.build.img))						  	// Вивантаження файлу img в папку dist/img.
-    .pipe(src(path.src.img))									// Обираємо файл img, який знаходиться в папці #src/img.
+    .pipe(dest(path.build.img))		 // Вивантаження файлу img в папку dist/img.
+    .pipe(src(path.src.img))			 // Обираємо файл img, який знаходиться в папці #src/img.
     .pipe(
-      imagemin({                              // Стискає зображення.
+      imagemin({                   // Стискає зображення.
         interlaced: true,
         progressive: true,
-        optimizationLevel: 3,     // від 0 до 7.
+        optimizationLevel: 3,      // від 0 до 7.
         svgoPlugins: [
           {
             removeViewBox: false
@@ -126,8 +126,8 @@ function images() {													  // img з папки SRC -> в папку dist
         ]
       })
     )
-    .pipe(dest(path.build.img))						  	// Вивантаження файлу img в папку dist/img.
-    .pipe(browsersync.stream())								// Перезавантажили сторінку.
+    .pipe(dest(path.build.img))			// Вивантаження файлу img в папку dist/img.
+    .pipe(browsersync.stream())			// Перезавантажили сторінку.
 }
 
 gulp.task('svgSprite', function () {
@@ -140,7 +140,7 @@ gulp.task('svgSprite', function () {
         }
       },
     }))
-    .pipe(dest(path.build.img))						  	// Вивантаження файлу img в папку dist.
+    .pipe(dest(path.build.img))			// Вивантаження файлу img в папку dist.
 })
 
 function watchFiles(params) {
