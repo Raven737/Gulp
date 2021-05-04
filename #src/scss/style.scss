@@ -1,3 +1,14 @@
+* {
+    margin : 0;
+    padding: 0;
+}
+
+span {
+    display  : inline-block;
+    font-size: 36px;
+    margin   : 20px;
+}
+
 @import '_header';
 @import '_main';
 @import '_footer';

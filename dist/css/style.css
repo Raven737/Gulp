@@ -1,11 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  display: inline-block;
+  font-size: 36px;
+  margin: 20px;
+}
+
 .header {
   height: 150px;
   background-color: burlywood;
 }
 
 .main {
-  height: 400px;
-  background-color: #d41414;
+  height: 500px;
+  background-color: #34bed6;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
