@@ -1,4 +1,3 @@
-// New corect file !!!
 // import { src, dest, watch, series, parallel } from 'gulp';
 import gulp from 'gulp';
 import browsersync from 'browser-sync';
