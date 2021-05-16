@@ -97,5 +97,4 @@ export const sync = () => {             // Синхронізація.
 const build = gulp.series(deleteDist, gulp.parallel(html, css, js, img));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та img().
 // const watching = gulp.parallel(build, watchFiles, sync);
 // export default gulp.parallel(build, watchFiles, sync);
-
 export default gulp.series(deleteDist, gulp.parallel(html, css, js, img), gulp.parallel(watchFiles, sync));
