@@ -1,3 +1,4 @@
+// New corect file !!!
 // import { src, dest, watch, series, parallel } from 'gulp';
 import gulp from 'gulp';
 import browsersync from 'browser-sync';
@@ -24,27 +25,16 @@ const path = {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/script.js",
-    img: source_folder + "/img/**/*.*",  //  {jpg, png, svg, gif, ico, webp}
+    img: source_folder + "/img/**/*", // {jpg, png, svg, gif, ico, webp}
     fonts: source_folder + "/fonts/*.ttf",
   },
   watch: {
     html: source_folder + "/**/*.html",
     css: source_folder + "/scss/**/*.scss",
     js: source_folder + "/js/**/*.js",
-    img: source_folder + "/img/**/*.{jpg, png, svg, gif, ico, webp}",
-  },
-  clean: "./" + project_folder + "/",
+    img: source_folder + "/img/**/*.*", // {jpg, png, svg, gif, ico, webp}
+  }
 }
-
-export const sync = () => {
-  browsersync.init({
-    server: {
-      baseDir: "./" + project_folder + "/"
-    },
-    port: 3000,
-    notify: false
-  })
-};
 
 export const html = () => {						  // HTML з папки SRC -> в папку dist -> перезавантаження сторінки.
   return gulp.src(path.src.html)		 	  // Обирає файл html (#src/.html, а файли _*.html НЕ обирає).
@@ -85,17 +75,28 @@ export const img = () => {
 }
 
 export const watchFiles = () => {
-  gulp.watch([path.watch.html], html);	// "Слідкує" за html (#src/**/*.html), якщо є зміни - спрацьовує функція html().
-  gulp.watch([path.watch.css], css);		// "Слідкує" за css (#src/scss/**/*.scss), якщо є зміни - спрацьовує функція css().
-  gulp.watch([path.watch.js], js);			// "Слідкує" за js (#src/js/**/*.js), якщо є зміни - спрацьовує функція js().
-  gulp.watch([path.watch.img], img);		// "Слідкує" за img (#src/img/**/*.{jpg, png, svg, gif, ico, webp}), якщо є зміни - спрацьовує функція img().
+  gulp.watch([path.watch.html], build, html);	// "Слідкує" за html (#src/**/*.html), якщо є зміни - спрацьовує функція html().
+  gulp.watch([path.watch.css], build, css);		// "Слідкує" за css (#src/scss/**/*.scss), якщо є зміни - спрацьовує функція css().
+  gulp.watch([path.watch.js], build, js);			// "Слідкує" за js (#src/js/**/*.js), якщо є зміни - спрацьовує функція js().
+  gulp.watch([path.watch.img], build, img);		// "Слідкує" за img (#src/img/**/*.{jpg, png, svg, gif, ico, webp}), якщо є зміни - спрацьовує функція img().
 }
 
-export const clean = () => {
-  return del(path.clean);			          // Видаляє папку dist.
+export const deleteDist = () => {       // Видаляє папку dist.
+  return del(project_folder);
 }
 
-const build = gulp.series(clean, gulp.parallel(html, css, js, img));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та img().
+export const sync = () => {             // Синхронізація.  
+  browsersync.init({
+    server: {
+      baseDir: "./" + project_folder + "/"
+    },
+    port: 3000,
+    notify: false
+  })
+};
+
+const build = gulp.series(deleteDist, gulp.parallel(html, css, js, img));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та img().
 // const watching = gulp.parallel(build, watchFiles, sync);
+// export default gulp.parallel(build, watchFiles, sync);
 
-export default gulp.parallel(build, watchFiles, sync);
+export default gulp.series(deleteDist, gulp.parallel(html, css, js, img), gulp.parallel(watchFiles, sync));
