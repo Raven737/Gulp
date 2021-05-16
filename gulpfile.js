@@ -18,21 +18,26 @@ const path = {
     css: project_folder + "/css/",
     js: project_folder + "/js/",
     img: project_folder + "/img/",
-    fonts: project_folder + "/fonts/",
+    // fonts: project_folder + "/fonts/",
   },
   src: {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/script.js",
     img: source_folder + "/img/**/*", // {jpg, png, svg, gif, ico, webp}
-    fonts: source_folder + "/fonts/*.ttf",
+    // fonts: source_folder + "/fonts/*.ttf",
   },
   watch: {
     html: source_folder + "/**/*.html",
     css: source_folder + "/scss/**/*.scss",
     js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.*", // {jpg, png, svg, gif, ico, webp}
+    // fonts: source_folder + "/fonts/*.ttf",
   }
+}
+
+export const deleteDist = () => {       // Видаляє папку dist.
+  return del(project_folder);
 }
 
 export const html = () => {						  // HTML з папки SRC -> в папку dist -> перезавантаження сторінки.
@@ -80,10 +85,6 @@ export const watchFiles = () => {
   gulp.watch([path.watch.img], build, img);		// "Слідкує" за img (#src/img/**/*.{jpg, png, svg, gif, ico, webp}), якщо є зміни - спрацьовує функція img().
 }
 
-export const deleteDist = () => {       // Видаляє папку dist.
-  return del(project_folder);
-}
-
 export const sync = () => {             // Синхронізація.  
   browsersync.init({
     server: {
@@ -97,4 +98,5 @@ export const sync = () => {             // Синхронізація.
 const build = gulp.series(deleteDist, gulp.parallel(html, css, js, img));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та img().
 // const watching = gulp.parallel(build, watchFiles, sync);
 // export default gulp.parallel(build, watchFiles, sync);
-export default gulp.series(deleteDist, gulp.parallel(html, css, js, img), gulp.parallel(watchFiles, sync));
+
+export default gulp.series(build, gulp.parallel(watchFiles, sync));
