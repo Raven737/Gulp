@@ -1,13 +1,15 @@
 // import { src, dest, watch, series, parallel } from 'gulp';
-import gulp from 'gulp';
-import browsersync from 'browser-sync';
-import fileinclude from 'gulp-file-include';
-import scss from 'gulp-sass';
-import autoprefixer from 'gulp-autoprefixer';
-import uglify from 'gulp-uglify';
-import group_media from 'gulp-group-css-media-queries';
-import rename from 'gulp-rename';
-import del from 'del';
+import browsersync from "browser-sync";
+import del from "del";
+import gulp from "gulp";
+import autoprefixer from "gulp-autoprefixer";
+import fileinclude from "gulp-file-include";
+import group_media from "gulp-group-css-media-queries";
+import rename from "gulp-rename";
+import uglify from "gulp-uglify";
+import dartSass from "sass";
+import gulpSass from "gulp-sass";
+const sass = gulpSass(dartSass);
 
 const project_folder = "dist"; // Production folder.
 const source_folder = "#src";  // Source folder.
@@ -49,14 +51,14 @@ export const html = () => {						  // HTML з папки SRC -> в папку di
 
 export const css = () => {							// SCSS -> CSS -> в dist/css -> перезавантаження сторінки.
   return gulp.src(path.src.css)			    // Обираємо файл style.scss (#src/scss/style.scss).
-    .pipe(scss({ outputStyle: "expanded" })) // scss -> css.
+    .pipe(sass({ outputStyle: "expanded" })) // scss -> css.
     .pipe(group_media())                // Групує і вставляє медіа запити в кінець файлу.
     .pipe(autoprefixer({                // Додає автопрефікси.
       overrideBrowserslist: ["last 5 versions"],
       cascade: true
     }))
     .pipe(gulp.dest(path.build.css))		// Вивантаження файлу css в папку dist/css --> (1 файл: css"expanded").
-    .pipe(scss({ outputStyle: "compressed" })) // Стискає файл.
+    .pipe(sass({ outputStyle: "compressed" })) // Стискає файл.
     .pipe(rename({ extname: ".min.css" }))  // Переіменовує файл: додає до імя + ".min.css".
     .pipe(gulp.dest(path.build.css))		// Вивантаження файлу css в папку dist/css --> (2 файл: name.min.css "compressed").
     .pipe(browsersync.stream())		      // Перезавантажує сторінку.
@@ -96,7 +98,5 @@ export const sync = () => {             // Синхронізація.
 };
 
 const build = gulp.series(deleteDist, gulp.parallel(html, css, js, img));	// Видаляє папку dist, а потім одночасно виконує функції html(), css(), js() та img().
-// const watching = gulp.parallel(build, watchFiles, sync);
-// export default gulp.parallel(build, watchFiles, sync);
 
 export default gulp.series(build, gulp.parallel(watchFiles, sync));
