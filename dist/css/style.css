@@ -16,7 +16,7 @@ span {
 
 .main {
   height: 500px;
-  background-color: #34bed6;
+  background-color: rgb(52, 190, 214);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,5 +35,5 @@ span {
 
 .footer {
   height: 150px;
-  background-color: #da8313;
+  background-color: rgb(218, 131, 19);
 }
