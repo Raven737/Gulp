@@ -1,7 +1,7 @@
-// import { src, dest, watch, series, parallel } from 'gulp';
+import gulp from "gulp";
+const { src, dest, watch, series, parallel } = gulp;
 import browsersync from "browser-sync";
 import del from "del";
-import gulp from "gulp";
 import autoprefixer from "gulp-autoprefixer";
 import fileinclude from "gulp-file-include";
 import group_media from "gulp-group-css-media-queries";
