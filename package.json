@@ -1,24 +1,24 @@
 {
-  "name": "raven-gulp",
-  "type": "module",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Raven737",
-  "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.28.1",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-file-include": "^2.3.0",
-    "gulp-group-css-media-queries": "^1.2.2",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-uglify": "^3.0.2",
-    "sass": "^1.58.3"
-  }
+    "name": "raven-gulp",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Raven737",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.28.1",
+        "del": "^6.0.0",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-file-include": "^2.3.0",
+        "gulp-group-css-media-queries": "^1.2.2",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-uglify": "^3.0.2",
+        "sass": "^1.58.3"
+    }
 }
