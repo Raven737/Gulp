@@ -5,6 +5,7 @@ import del from "del";
 import autoprefixer from "gulp-autoprefixer";
 import fileinclude from "gulp-file-include";
 import group_media from "gulp-group-css-media-queries";
+import htmlmin from "gulp-htmlmin";
 import rename from "gulp-rename";
 import uglify from "gulp-uglify";
 import dartSass from "sass";
@@ -40,6 +41,9 @@ export const deleteDist = () => del(project_folder);
 export const html = () =>
     src(path.src.html)
         .pipe(fileinclude())
+        .pipe(dest(path.build.html))
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(rename({ extname: ".min.css" }))
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream());
 

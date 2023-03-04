@@ -1,12 +1,9 @@
 .main {
-    height          : 500px;
+    height: 70vh;
     background-color: rgb(52, 190, 214);
-    display         : flex;
-    justify-content : center;
-    align-items     : center;
+    text-align: center;
 
     & img {
-        width : 400px;
-        height: 400px;
+        height: 100%;
     }
 }

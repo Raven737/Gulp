@@ -1,1 +1,3 @@
-@@include('alert.js')
+const greetings = () => {
+    console.log("Hello");
+};

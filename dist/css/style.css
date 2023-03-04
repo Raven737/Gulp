@@ -3,37 +3,28 @@
   padding: 0;
 }
 
-span {
-  display: inline-block;
-  font-size: 36px;
-  margin: 20px;
+.container {
+  max-width: 1400px;
+  height: 100vh;
+  margin: auto;
 }
 
 .header {
-  height: 150px;
+  height: 15vh;
   background-color: burlywood;
 }
 
 .main {
-  height: 500px;
+  height: 70vh;
   background-color: rgb(52, 190, 214);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  text-align: center;
 }
 
 .main img {
-  width: 400px;
-  height: 400px;
+  height: 100%;
 }
 
 .footer {
-  height: 150px;
+  height: 15vh;
   background-color: rgb(218, 131, 19);
 }

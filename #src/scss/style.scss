@@ -1,14 +1,13 @@
 * {
-    margin : 0;
+    margin: 0;
     padding: 0;
 }
-
-span {
-    display  : inline-block;
-    font-size: 36px;
-    margin   : 20px;
+.container {
+    max-width: 1400px;
+    height: 100vh;
+    margin: auto;
 }
 
-@import '_header';
-@import '_main';
-@import '_footer';
+@import "_header";
+@import "_main";
+@import "_footer";

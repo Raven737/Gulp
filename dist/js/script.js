@@ -1,1 +1,3 @@
-// alert('Hello Gulp !');
+const greetings = () => {
+    console.log("Hello");
+};
